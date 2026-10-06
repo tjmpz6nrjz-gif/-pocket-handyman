@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Pocket Handyman V1</title>
+<title>Pocket Handyman V2</title>
 <style>
 :root{--blue:#0a66d8;--green:#159447;--bg:#f3f5f7;--card:#fff;--text:#111827;--muted:#667085;--line:#d8dee7;--red:#c9342f}
 *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text)}
@@ -12,21 +12,34 @@
 header{position:sticky;top:0;z-index:4;background:#07599f;color:white;padding:calc(14px + env(safe-area-inset-top)) 18px 14px;font-weight:800;font-size:20px}
 main{padding:14px}.screen{display:none}.screen.active{display:block}.card{background:white;border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:12px}
 h2,h3{margin:0 0 10px} .muted{color:var(--muted);font-size:13px}.big{font-size:30px;font-weight:800}.money{font-size:24px;font-weight:800}
-button{font:inherit;border:0;border-radius:10px;padding:13px 14px;font-weight:700;cursor:pointer}.primary{background:var(--blue);color:white;width:100%}.green{background:var(--green);color:white;width:100%}.secondary{background:#e8eef6;color:#164a78}.danger{background:#fff0ef;color:var(--red);border:1px solid #f3c5c2}
+button{font:inherit;border:0;border-radius:10px;padding:13px 14px;font-weight:700;cursor:pointer}.primary{background:var(--blue);color:white;width:100%}.green{background:var(--green);color:white;width:100%}
+.secondary{background:#f3f5f7;color:var(--text);width:100%;border:1px solid var(--line)}.tertiary{background:white;color:var(--blue);border:2px solid var(--blue);width:100%}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #edf0f4}.row:last-child{border-bottom:0}
 label{display:block;font-weight:650;margin:12px 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid #cfd6df;border-radius:9px;background:white;font:inherit}textarea{min-height:76px}
 .check{display:flex;align-items:center;gap:10px;padding:9px 0}.check input{width:auto;transform:scale(1.2)}
 .notice{padding:11px;border-radius:10px;background:#fff1f0;color:#9f2925;margin:10px 0}.good{background:#ecf8ef;color:#146c36}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:white;border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:5}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:white;border-top:1px solid var(--line);padding:6px 4px;gap:2px;z-index:3}
 nav button{background:white;padding:7px 2px;border-radius:8px;font-size:11px;color:#475467}nav button.active{color:var(--blue);background:#eef5ff}.icon{display:block;font-size:19px;margin-bottom:2px}
-.timer{text-align:center;font-size:48px;font-weight:800;letter-spacing:1px;margin:18px 0}.pill{display:inline-block;padding:5px 8px;border-radius:99px;background:#edf4ff;color:#155bb5;font-size:12px;font-weight:700}
+.timer{text-align:center;font-size:48px;font-weight:800;letter-spacing:1px;margin:18px 0}.pill{display:inline-block;padding:5px 8px;border-radius:99px;background:#edf4ff;color:#155bb5;font-size:12px;font-weight:600}
 .bar{height:10px;background:#e8edf3;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;background:var(--green)}
 .smallbtn{padding:8px 10px;font-size:13px}.topspace{margin-top:12px}
+.categoryBtn{background:white;border:2px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;text-align:left;width:100%;cursor:pointer;transition:all 0.2s}
+.categoryBtn:active,.categoryBtn:focus{border-color:var(--blue);background:#eef5ff}
+.categoryBtn h3{margin:0;font-size:16px}.categoryBtn .muted{display:block;margin-top:4px}
+.question{margin:14px 0;padding:14px;background:#f9fafb;border-radius:10px}.question p{margin:0 0 12px;font-weight:600}
+.answerBtn{display:block;width:100%;padding:12px;margin-bottom:8px;background:white;border:1px solid var(--line);border-radius:9px;cursor:pointer;text-align:left;font-weight:600;color:var(--blue)}
+.answerBtn:last-child{margin-bottom:0}.answerBtn.selected{background:var(--blue);color:white}
+.howto{padding:8px 10px;font-size:12px;background:white;border:1px solid var(--line);color:var(--blue);margin-top:8px;cursor:pointer}
+.scopeSummary{background:#ecf8ef;border:1px solid var(--green);border-radius:10px;padding:12px;margin:12px 0}
+.scopeSummary h4{margin:0 0 8px;color:var(--green);font-size:14px}
+.scopeItem{padding:6px 0;font-size:14px}.scopeItem:before{content:"✓ ";color:var(--green);font-weight:700;margin-right:6px}
+.backBtn{background:#f3f5f7;color:var(--text);width:100%;border:1px solid var(--line);margin-bottom:12px}
+.step-indicator{font-size:12px;color:var(--muted);margin-bottom:8px}
 </style>
 </head>
 <body>
 <div class="app">
-<header id="title">Pocket Handyman</header>
+<header id="title">Pocket Handyman V2</header>
 <main>
 
 <section id="home" class="screen active">
@@ -37,7 +50,7 @@ nav button{background:white;padding:7px 2px;border-radius:8px;font-size:11px;col
     <button class="primary" onclick="show('job')">START JOB</button>
   </div>
   <div class="grid">
-    <button class="green" onclick="show('newjob')">＋ New Job</button>
+    <button class="green" onclick="show('customerinfo')">＋ New Job</button>
     <button class="primary" onclick="show('jobs')">Jobs</button>
     <button class="secondary" onclick="show('inventory')">Inventory</button>
     <button class="secondary" onclick="show('money')">Money</button>
@@ -53,44 +66,83 @@ nav button{background:white;padding:7px 2px;border-radius:8px;font-size:11px;col
   </div>
 </section>
 
-<section id="newjob" class="screen">
+<section id="customerinfo" class="screen">
  <div class="card"><h2>New Job</h2>
-  <label>Customer name</label><input value="Johnson">
-  <label>Phone</label><input value="(555) 123-4567">
-  <label>What does the customer need?</label><textarea>65-inch TV. Customer wants articulating mount and hidden wires.</textarea>
-  <div class="notice good"><b>Suggested category:</b> TV / Wall Mounting</div>
-  <button class="primary" onclick="show('assessment')">START ASSESSMENT</button>
+  <label>Customer name</label><input id="custName" value="Johnson">
+  <label>Phone</label><input id="custPhone" value="(555) 123-4567">
+  <label>What does the customer need?</label><textarea id="custNeed">65-inch TV. Customer wants articulating mount and hidden wires.</textarea>
+  <button class="primary topspace" onclick="show('category')">NEXT</button>
  </div>
 </section>
 
-<section id="assessment" class="screen">
- <div class="card"><h2>Guided Assessment</h2>
-  <label>TV size</label><select><option>65"</option><option>55"</option><option>75"</option></select>
-  <label>Mount type</label><select><option>Articulating</option><option>Fixed</option><option>Tilting</option><option>Not sure</option></select>
-  <label>Wall construction</label><select><option>Drywall / wood studs</option><option>Masonry</option><option>Metal studs</option><option>Not sure</option></select>
-  <label>What needs concealed?</label>
-  <div class="check"><input type="checkbox" checked> HDMI / low voltage</div>
-  <div class="check"><input id="power" type="checkbox" checked onchange="powerFlag()"> Power</div>
-  <div id="powerflag" class="notice"><b>Electrical scope:</b> New/relocated outlet requires an electrician. Keep it excluded from your scope.</div>
-  <button class="secondary" onclick="alert('Training pathway: this button can open a vetted how-to or targeted YouTube search in the production app.')">▶ HOW-TO / YOUTUBE</button>
-  <button class="primary topspace" onclick="show('estimate')">BUILD SCOPE & ESTIMATE</button>
+<section id="category" class="screen">
+ <div class="card"><h2>Select Category</h2>
+  <div class="step-indicator">Step 1 of 3</div>
+  <button class="categoryBtn" onclick="selectCategory('carpentry')"><h3>Carpentry</h3><span class="muted">Framing, shelving, cabinetry</span></button>
+  <button class="categoryBtn" onclick="selectCategory('doors')"><h3>Doors & Hardware</h3><span class="muted">Installation, repair, locks</span></button>
+  <button class="categoryBtn" onclick="selectCategory('drywall')"><h3>Drywall & Walls</h3><span class="muted">Patching, mudding, painting prep</span></button>
+  <button class="categoryBtn" onclick="selectCategory('tv')"><h3>TV & Wall Mounting</h3><span class="muted">Mount installation, cable routing</span></button>
+  <button class="categoryBtn" onclick="selectCategory('painting')"><h3>Painting</h3><span class="muted">Interior, exterior, prep & finish</span></button>
+  <button class="categoryBtn" onclick="selectCategory('assembly')"><h3>Assembly & Installation</h3><span class="muted">Furniture, shelving, fixtures</span></button>
+  <button class="categoryBtn" onclick="selectCategory('exterior')"><h3>Exterior</h3><span class="muted">Siding, fencing, weatherproofing</span></button>
+  <button class="categoryBtn" onclick="selectCategory('general')"><h3>General Repair</h3><span class="muted">Misc fixes & maintenance</span></button>
+  <button class="categoryBtn" onclick="selectCategory('custom')"><h3>Custom/Other</h3><span class="muted">Specialized or mixed work</span></button>
+ </div>
+</section>
+
+<section id="assess_tv" class="screen">
+ <div class="card">
+  <button class="backBtn smallbtn" onclick="show('category')">← Back</button>
+  <h2>TV Mounting Assessment</h2>
+  <div class="step-indicator">Step 2 of 3</div>
+  <div id="tvQuestions"></div>
+ </div>
+</section>
+
+<section id="assess_doors" class="screen">
+ <div class="card">
+  <button class="backBtn smallbtn" onclick="show('category')">← Back</button>
+  <h2>Doors & Hardware Assessment</h2>
+  <div class="step-indicator">Step 2 of 3</div>
+  <div id="doorsQuestions"></div>
+ </div>
+</section>
+
+<section id="assess_drywall" class="screen">
+ <div class="card">
+  <button class="backBtn smallbtn" onclick="show('category')">← Back</button>
+  <h2>Drywall & Walls Assessment</h2>
+  <div class="step-indicator">Step 2 of 3</div>
+  <div id="drywallQuestions"></div>
+ </div>
+</section>
+
+<section id="assess_generic" class="screen">
+ <div class="card">
+  <button class="backBtn smallbtn" onclick="show('category')">← Back</button>
+  <h2>Job Assessment</h2>
+  <div class="step-indicator">Step 2 of 3</div>
+  <label>Project Description</label><textarea id="genDesc" placeholder="Describe the work..."></textarea>
+  <label>Scope of Work</label><textarea id="genScope" placeholder="What specifically will you do?"></textarea>
+  <button class="primary topspace" onclick="proceedToEstimate()">BUILD SCOPE & ESTIMATE</button>
  </div>
 </section>
 
 <section id="estimate" class="screen">
- <div class="card"><h2>Scope & Estimate</h2>
-  <div class="check"><input type="checkbox" checked> Locate framing / layout</div>
-  <div class="check"><input type="checkbox" checked> Install articulating bracket</div>
-  <div class="check"><input type="checkbox" checked> Mount 65" TV</div>
-  <div class="check"><input type="checkbox" checked> Route HDMI / low-voltage cable</div>
-  <div class="check"><input type="checkbox" checked> Final adjustment & cleanup</div>
-  <div class="notice"><b>Excluded:</b> electrical outlet installation</div>
-  <div class="row"><span>Expected production</span><b>2 hr 45 min</b></div>
-  <div class="row"><span>Reserved block</span><b>4 hr</b></div>
+ <div class="card">
+  <button class="backBtn smallbtn" onclick="backFromEstimate()">← Back</button>
+  <h2>Scope & Estimate</h2>
+  <div class="step-indicator">Step 3 of 3</div>
+  <div id="scopeDisplay" class="scopeSummary">
+   <h4>Generated Scope</h4>
+   <div id="scopeItems"></div>
+  </div>
+  <div id="customScopeItems"></div>
   <label>Labor quote</label><input id="laborQuote" type="number" value="250" oninput="recalc()">
   <label>Estimated materials charged</label><input id="materialsQuote" type="number" value="74" oninput="recalc()">
   <div class="row"><span>Customer estimate</span><b id="quoteTotal">$324</b></div>
-  <button class="primary" onclick="show('materials')">MATERIALS</button>
+  <button class="secondary topspace" onclick="addScopeItem()">＋ Add Custom Scope Item</button>
+  <button class="primary topspace" onclick="show('materials')">MATERIALS</button>
  </div>
 </section>
 
@@ -106,7 +158,7 @@ nav button{background:white;padding:7px 2px;border-radius:8px;font-size:11px;col
 </section>
 
 <section id="job" class="screen">
- <div class="card"><h2>TV Mounting — Job Mode</h2>
+ <div class="card"><h2 id="jobTitle">TV Mounting — Job Mode</h2>
   <div id="timer" class="timer">00:00:00</div>
   <div class="grid">
    <button id="startBtn" class="green" onclick="toggleTimer()">START</button>
@@ -174,34 +226,177 @@ nav button{background:white;padding:7px 2px;border-radius:8px;font-size:11px;col
 <nav>
 <button data-screen="home" class="active" onclick="show('home')"><span class="icon">⌂</span>Home</button>
 <button data-screen="jobs" onclick="show('jobs')"><span class="icon">▣</span>Jobs</button>
-<button data-screen="newjob" onclick="show('newjob')"><span class="icon">＋</span>Job</button>
+<button data-screen="customerinfo" onclick="show('customerinfo')"><span class="icon">＋</span>Job</button>
 <button data-screen="inventory" onclick="show('inventory')"><span class="icon">▤</span>Inventory</button>
 <button data-screen="money" onclick="show('money')"><span class="icon">▥</span>Money</button>
 </nav>
 </div>
 <script>
+const assessments = {
+  tv: {title:'TV & Wall Mounting', questions:[
+    {id:'tvsize',type:'multiple',question:'What is the TV size?',howto:'Measure the diagonal screen width in inches',answers:['55"','65"','75"','85"+','Not sure'],scopeMap:{'55"':'Mount 55" TV','65"':'Mount 65" TV','75"':'Mount 75" TV','85"+':'Mount 85"+ TV','Not sure':'Determine TV size on-site'}},
+    {id:'mounttype',type:'multiple',question:'What mount type?',howto:'Check customer requirements for movement capability',answers:['Fixed (flat against wall)','Tilting (up/down)','Articulating (swivel)','Not sure'],scopeMap:{'Fixed (flat against wall)':'Install fixed mount','Tilting (up/down)':'Install tilting mount','Articulating (swivel)':'Install articulating mount','Not sure':'Assess mount options on-site'}},
+    {id:'walltype',type:'multiple',question:'Wall construction?',howto:'Check for studs, studs vs masonry type, and framing',answers:['Drywall with wood studs','Masonry/brick','Metal studs','Not sure'],scopeMap:{'Drywall with wood studs':'Locate studs & install into framing','Masonry/brick':'Use masonry anchors/fasteners','Metal studs':'Use appropriate metal stud fasteners','Not sure':'Inspect wall on-site'}},
+    {id:'cables',type:'multiple',question:'What needs to be concealed?',howto:'Identify where cable runs need to be hidden',answers:['HDMI / low-voltage cables','Power cord','Both','Nothing'],scopeMap:{'HDMI / low-voltage cables':'Route HDMI behind wall','Power cord':'Route power & install outlet (electrical scope)','Both':'Route all cables & coordinate electrical','Nothing':'No cable concealment needed'}},
+    {id:'electrical',type:'multiple',question:'Does electrical outlet installation need to happen?',howto:'New or relocated outlets require licensed electrician',answers:['Yes','No','Not sure'],scopeMap:{Yes:'Coordinate with licensed electrician for outlet',No:'Existing outlet nearby', 'Not sure':'Check outlet availability on-site'}}
+  ]},
+  doors:{title:'Doors & Hardware', questions:[
+    {id:'doortype',type:'multiple',question:'What type of door work?',howto:'Identify if new installation, repair, or replacement',answers:['New door installation','Door repair','Hardware only','Not sure'],scopeMap:{'New door installation':'Install new door & hardware','Door repair':'Repair existing door issues','Hardware only':'Install/replace handles, locks, hinges','Not sure':'Assess door condition on-site'}},
+    {id:'doorsize',type:'multiple',question:'Door size?',howto:'Measure width in inches',answers:['Single 32"','Single 36"','Single 40"+','Double doors','Not sure'],scopeMap:{'Single 32"':'Install 32" single door','Single 36"':'Install 36" single door','Single 40"+':'Install wide/custom door','Double doors':'Install double doors','Not sure':'Measure opening on-site'}},
+    {id:'doorframe',type:'multiple',question:'Does the door frame need replacement?',howto:'Check if frame is damaged, rotted, or not standard',answers:['Yes','No','Not sure'],scopeMap:{Yes:'Replace door frame',No:'Reuse existing frame','Not sure':'Inspect frame on-site'}},
+    {id:'hardwaretype',type:'multiple',question:'Hardware needed?',howto:'Check lock style, hinge count, and finish preference',answers:['Basic hinges & handle','Entry lock (keyed)','Privacy lock','Smart lock','Multiple'],scopeMap:{'Basic hinges & handle':'Install standard hinges & handle','Entry lock (keyed)':'Install keyed entry lock','Privacy lock':'Install privacy/bath lock','Smart lock':'Install smart lock (may require electrical)','Multiple':'Install multiple hardware types'}}
+  ]},
+  drywall:{title:'Drywall & Walls', questions:[
+    {id:'repairtype',type:'multiple',question:'What drywall work is needed?',howto:'Identify scope: small holes, large patches, or full wall prep',answers:['Small holes (nail/screw)','Medium patches (2-4 sq ft)','Large patches (4+ sq ft)','Full wall prep','Not sure'],scopeMap:{'Small holes (nail/screw)':'Patch small nail/screw holes','Medium patches (2-4 sq ft)':'Patch 2-4 sq ft areas','Large patches (4+ sq ft)':'Patch large damaged areas','Full wall prep':'Prepare entire wall for painting','Not sure':'Inspect damage on-site'}},
+    {id:'dampness',type:'multiple',question:'Is there water damage or dampness?',howto:'Check for soft spots, stains, or moisture',answers:['Yes','No','Not sure'],scopeMap:{Yes:'Address water source & replace damaged drywall',No:'Standard drywall repair','Not sure':'Inspect for moisture on-site'}},
+    {id:'mudcoats',type:'multiple',question:'How many mud coats will be needed?',howto:'Small patches need 1-2, larger areas need 2-3 for smooth finish',answers:['1 coat','2 coats','3+ coats','Not sure'],scopeMap:{'1 coat':'Single coat finish','2 coats':'Two-coat taping & mudding','3+ coats':'Multiple coats for seamless finish','Not sure':'Determine on-site based on finish level'}},
+    {id:'painting',type:'multiple',question:'Will you paint the finished repair?',howto:'Confirm if painting is included in scope',answers:['Yes, full wall','Yes, patch only','No, customer paints','Not sure'],scopeMap:{'Yes, full wall':'Sand, prime, paint entire wall','Yes, patch only':'Sand, prime, paint patched area','No, customer paints':'Finish mudding, customer handles paint','Not sure':'Confirm painting scope with customer'}}
+  ]}
+};
+let currentAssessment = null;
+let assessmentAnswers = {};
+let currentScopeItems = [];
+
 function show(id){
  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
- document.getElementById(id).classList.add('active');
+ const target = document.getElementById(id);
+ if(target) target.classList.add('active');
  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
- document.getElementById('title').textContent = id==='home'?'Pocket Handyman':document.querySelector('#'+id+' h2')?.textContent||'Pocket Handyman';
+ const header = document.getElementById('title');
+ if(header){
+   if(id==='home') header.textContent='Pocket Handyman V2';
+   else {
+     const h2 = document.querySelector('#'+id+' h2');
+     header.textContent = h2 ? h2.textContent : 'Pocket Handyman V2';
+   }
+ }
  window.scrollTo(0,0);
 }
-function powerFlag(){document.getElementById('powerflag').style.display=document.getElementById('power').checked?'block':'none'}
+
+function selectCategory(cat){
+  assessmentAnswers = {};
+  currentScopeItems = [];
+  if(cat==='tv'){currentAssessment=assessments.tv; renderAssessmentQuestions('tvQuestions', assessments.tv); show('assess_tv');}
+  else if(cat==='doors'){currentAssessment=assessments.doors; renderAssessmentQuestions('doorsQuestions', assessments.doors); show('assess_doors');}
+  else if(cat==='drywall'){currentAssessment=assessments.drywall; renderAssessmentQuestions('drywallQuestions', assessments.drywall); show('assess_drywall');}
+  else {currentAssessment = null; show('assess_generic');}
+}
+
+function renderAssessmentQuestions(containerId, assessment){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  container.innerHTML = '';
+  assessment.questions.forEach((q, idx) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'question';
+    let html = `<p>${idx+1}. ${q.question}</p>`;
+    q.answers.forEach(ans => {
+      const active = assessmentAnswers[q.id] === ans ? 'selected' : '';
+      html += `<button class="answerBtn ${active}" onclick="selectAnswer('${q.id}','${ans}','${containerId}')">${ans}</button>`;
+    });
+    if(q.howto) html += `<button class="howto" onclick="openHowTo('${escapeHtml(q.question)}')">? How to check</button>`;
+    wrapper.innerHTML = html;
+    container.appendChild(wrapper);
+  });
+  const btn = document.createElement('button');
+  btn.className = 'primary topspace';
+  btn.textContent = 'BUILD SCOPE & ESTIMATE';
+  btn.onclick = proceedFromAssessment;
+  container.appendChild(btn);
+}
+
+function escapeHtml(str){ return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;'); }
+
+function selectAnswer(qid, ans, containerId){
+  assessmentAnswers[qid] = ans;
+  const assessment = currentAssessment || assessments.tv;
+  renderAssessmentQuestions(containerId, assessment);
+}
+
+function openHowTo(topic){
+  const search = encodeURIComponent('how to ' + topic + ' home repair');
+  window.open('https://www.youtube.com/results?search_query=' + search, '_blank');
+}
+
+function proceedFromAssessment(){
+  currentScopeItems = [];
+  if(currentAssessment){
+    currentAssessment.questions.forEach(q => {
+      const answer = assessmentAnswers[q.id];
+      if(answer && q.scopeMap && q.scopeMap[answer]) currentScopeItems.push(q.scopeMap[answer]);
+    });
+  }
+  if(currentScopeItems.length === 0){
+    currentScopeItems.push('General job work and customer-approved scope');
+  }
+  renderScopeAndEstimate();
+  show('estimate');
+}
+
+function proceedToEstimate(){
+  currentScopeItems = [];
+  const scope = document.getElementById('genScope').value;
+  const desc = document.getElementById('genDesc').value;
+  if(desc) currentScopeItems.push(desc);
+  if(scope) currentScopeItems.push(scope);
+  if(currentScopeItems.length === 0) currentScopeItems.push('General repair scope to be confirmed on-site');
+  renderScopeAndEstimate();
+  show('estimate');
+}
+
+function renderScopeAndEstimate(){
+  const scopeItemsDiv = document.getElementById('scopeItems');
+  if(scopeItemsDiv){
+    scopeItemsDiv.innerHTML = '';
+    currentScopeItems.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'scopeItem';
+      div.textContent = item;
+      scopeItemsDiv.appendChild(div);
+    });
+  }
+  recalc();
+}
+
+function addScopeItem(){
+  const item = prompt('Add custom scope item:');
+  if(item){
+    currentScopeItems.push(item.trim());
+    renderScopeAndEstimate();
+  }
+}
+
+function backFromEstimate(){
+  if(currentAssessment === assessments.tv) show('assess_tv');
+  else if(currentAssessment === assessments.doors) show('assess_doors');
+  else if(currentAssessment === assessments.drywall) show('assess_drywall');
+  else show('assess_generic');
+}
+
 function money(n){return '$'+Number(n||0).toFixed(2).replace('.00','')}
-function recalc(){document.getElementById('quoteTotal').textContent=money(+laborQuote.value + +materialsQuote.value)}
+function recalc(){
+  const labor = +document.getElementById('laborQuote').value || 0;
+  const mats = +document.getElementById('materialsQuote').value || 0;
+  document.getElementById('quoteTotal').textContent = money(labor + mats);
+}
 function closeCalc(){
- let p=+laborPaid.value + +matPaid.value, d=+matCost.value + +travelCost.value, c=p-d, h=+actualHours.value;
- paidTotal.textContent=money(p); directTotal.textContent=money(d); contribution.textContent=money(c);
- effective.textContent=h?money(c/h)+'/hr':'—';
+  let p=+(document.getElementById('laborPaid').value||0) + +(document.getElementById('matPaid').value||0);
+  let d=+(document.getElementById('matCost').value||0) + +(document.getElementById('travelCost').value||0);
+  let c=p-d, h=+(document.getElementById('actualHours').value||0);
+  document.getElementById('paidTotal').textContent=money(p);
+  document.getElementById('directTotal').textContent=money(d);
+  document.getElementById('contribution').textContent=money(c);
+  document.getElementById('effective').textContent=h?money(c/h)+'/hr':'—';
 }
 let secs=0, running=false, interval=null;
-function renderTimer(){let h=Math.floor(secs/3600),m=Math.floor((secs%3600)/60),s=secs%60;timer.textContent=[h,m,s].map(x=>String(x).padStart(2,'0')).join(':')}
+function renderTimer(){let h=Math.floor(secs/3600),m=Math.floor((secs%3600)/60),s=secs%60;document.getElementById('timer').textContent=[h,m,s].map(x=>String(x).padStart(2,'0')).join(':')}
 function toggleTimer(){
- running=!running; startBtn.textContent=running?'PAUSE':'START'; startBtn.className=running?'secondary':'green';
- if(running) interval=setInterval(()=>{secs++;renderTimer()},1000); else clearInterval(interval);
+  running=!running; const btn = document.getElementById('startBtn');
+  btn.textContent=running?'PAUSE':'START'; btn.className=running?'secondary':'green';
+  if(running) interval=setInterval(()=>{secs++;renderTimer()},1000); else clearInterval(interval);
 }
-function resetTimer(){clearInterval(interval);running=false;secs=0;startBtn.textContent='START';startBtn.className='green';renderTimer()}
+function resetTimer(){clearInterval(interval);running=false;secs=0;const btn=document.getElementById('startBtn');btn.textContent='START';btn.className='green';renderTimer()}
+renderTimer();
 </script>
 </body>
 </html>
