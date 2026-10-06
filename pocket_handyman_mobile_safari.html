@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Pocket Handyman V1</title>
+<style>
+:root{--blue:#0a66d8;--green:#159447;--bg:#f3f5f7;--card:#fff;--text:#111827;--muted:#667085;--line:#d8dee7;--red:#c9342f}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text)}
+.app{max-width:520px;margin:auto;min-height:100vh;background:var(--bg);padding-bottom:78px}
+header{position:sticky;top:0;z-index:4;background:#07599f;color:white;padding:calc(14px + env(safe-area-inset-top)) 18px 14px;font-weight:800;font-size:20px}
+main{padding:14px}.screen{display:none}.screen.active{display:block}.card{background:white;border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:12px}
+h2,h3{margin:0 0 10px} .muted{color:var(--muted);font-size:13px}.big{font-size:30px;font-weight:800}.money{font-size:24px;font-weight:800}
+button{font:inherit;border:0;border-radius:10px;padding:13px 14px;font-weight:700;cursor:pointer}.primary{background:var(--blue);color:white;width:100%}.green{background:var(--green);color:white;width:100%}.secondary{background:#e8eef6;color:#164a78}.danger{background:#fff0ef;color:var(--red);border:1px solid #f3c5c2}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #edf0f4}.row:last-child{border-bottom:0}
+label{display:block;font-weight:650;margin:12px 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid #cfd6df;border-radius:9px;background:white;font:inherit}textarea{min-height:76px}
+.check{display:flex;align-items:center;gap:10px;padding:9px 0}.check input{width:auto;transform:scale(1.2)}
+.notice{padding:11px;border-radius:10px;background:#fff1f0;color:#9f2925;margin:10px 0}.good{background:#ecf8ef;color:#146c36}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:white;border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:5}
+nav button{background:white;padding:7px 2px;border-radius:8px;font-size:11px;color:#475467}nav button.active{color:var(--blue);background:#eef5ff}.icon{display:block;font-size:19px;margin-bottom:2px}
+.timer{text-align:center;font-size:48px;font-weight:800;letter-spacing:1px;margin:18px 0}.pill{display:inline-block;padding:5px 8px;border-radius:99px;background:#edf4ff;color:#155bb5;font-size:12px;font-weight:700}
+.bar{height:10px;background:#e8edf3;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;background:var(--green)}
+.smallbtn{padding:8px 10px;font-size:13px}.topspace{margin-top:12px}
+</style>
+</head>
+<body>
+<div class="app">
+<header id="title">Pocket Handyman</header>
+<main>
+
+<section id="home" class="screen active">
+  <div class="card">
+    <div class="muted">TODAY</div><h2>TV Mounting</h2>
+    <div>9:00 AM · 65" TV · articulating mount</div>
+    <div class="money" style="margin:10px 0">$250 <span class="muted">labor + materials</span></div>
+    <button class="primary" onclick="show('job')">START JOB</button>
+  </div>
+  <div class="grid">
+    <button class="green" onclick="show('newjob')">＋ New Job</button>
+    <button class="primary" onclick="show('jobs')">Jobs</button>
+    <button class="secondary" onclick="show('inventory')">Inventory</button>
+    <button class="secondary" onclick="show('money')">Money</button>
+  </div>
+  <div class="card topspace">
+    <h3>This Month</h3>
+    <div class="row"><span>Jobs completed</span><b>6</b></div>
+    <div class="row"><span>Payments</span><b>$1,740</b></div>
+    <div class="row"><span>Direct costs</span><b>$326</b></div>
+    <div class="row"><span>Contribution</span><b>$1,414</b></div>
+    <div class="row"><span>Actual labor</span><b>18.2 hr</b></div>
+    <div class="row"><span>Effective earnings</span><b>$77.69/hr</b></div>
+  </div>
+</section>
+
+<section id="newjob" class="screen">
+ <div class="card"><h2>New Job</h2>
+  <label>Customer name</label><input value="Johnson">
+  <label>Phone</label><input value="(555) 123-4567">
+  <label>What does the customer need?</label><textarea>65-inch TV. Customer wants articulating mount and hidden wires.</textarea>
+  <div class="notice good"><b>Suggested category:</b> TV / Wall Mounting</div>
+  <button class="primary" onclick="show('assessment')">START ASSESSMENT</button>
+ </div>
+</section>
+
+<section id="assessment" class="screen">
+ <div class="card"><h2>Guided Assessment</h2>
+  <label>TV size</label><select><option>65"</option><option>55"</option><option>75"</option></select>
+  <label>Mount type</label><select><option>Articulating</option><option>Fixed</option><option>Tilting</option><option>Not sure</option></select>
+  <label>Wall construction</label><select><option>Drywall / wood studs</option><option>Masonry</option><option>Metal studs</option><option>Not sure</option></select>
+  <label>What needs concealed?</label>
+  <div class="check"><input type="checkbox" checked> HDMI / low voltage</div>
+  <div class="check"><input id="power" type="checkbox" checked onchange="powerFlag()"> Power</div>
+  <div id="powerflag" class="notice"><b>Electrical scope:</b> New/relocated outlet requires an electrician. Keep it excluded from your scope.</div>
+  <button class="secondary" onclick="alert('Training pathway: this button can open a vetted how-to or targeted YouTube search in the production app.')">▶ HOW-TO / YOUTUBE</button>
+  <button class="primary topspace" onclick="show('estimate')">BUILD SCOPE & ESTIMATE</button>
+ </div>
+</section>
+
+<section id="estimate" class="screen">
+ <div class="card"><h2>Scope & Estimate</h2>
+  <div class="check"><input type="checkbox" checked> Locate framing / layout</div>
+  <div class="check"><input type="checkbox" checked> Install articulating bracket</div>
+  <div class="check"><input type="checkbox" checked> Mount 65" TV</div>
+  <div class="check"><input type="checkbox" checked> Route HDMI / low-voltage cable</div>
+  <div class="check"><input type="checkbox" checked> Final adjustment & cleanup</div>
+  <div class="notice"><b>Excluded:</b> electrical outlet installation</div>
+  <div class="row"><span>Expected production</span><b>2 hr 45 min</b></div>
+  <div class="row"><span>Reserved block</span><b>4 hr</b></div>
+  <label>Labor quote</label><input id="laborQuote" type="number" value="250" oninput="recalc()">
+  <label>Estimated materials charged</label><input id="materialsQuote" type="number" value="74" oninput="recalc()">
+  <div class="row"><span>Customer estimate</span><b id="quoteTotal">$324</b></div>
+  <button class="primary" onclick="show('materials')">MATERIALS</button>
+ </div>
+</section>
+
+<section id="materials" class="screen">
+ <div class="card"><h2>Materials</h2>
+  <div class="row"><span>Articulating mount</span><span class="pill">BUY</span></div>
+  <div class="row"><span>HDMI cable</span><span class="pill">IN TRUCK</span></div>
+  <div class="row"><span>Low-voltage wall plates</span><span class="pill">BUY</span></div>
+  <div class="row"><span>Fasteners / anchors</span><span class="pill">IN TRUCK</span></div>
+  <div class="row"><span>Consumables</span><span class="pill">IN TRUCK</span></div>
+  <button class="primary topspace" onclick="show('job')">READY FOR JOB</button>
+ </div>
+</section>
+
+<section id="job" class="screen">
+ <div class="card"><h2>TV Mounting — Job Mode</h2>
+  <div id="timer" class="timer">00:00:00</div>
+  <div class="grid">
+   <button id="startBtn" class="green" onclick="toggleTimer()">START</button>
+   <button class="secondary" onclick="resetTimer()">RESET</button>
+  </div>
+  <button class="secondary topspace" onclick="alert('Material entry would open here.')">＋ MATERIAL USED</button>
+  <button class="secondary topspace" onclick="alert('Photo capture/selection would open here.')">＋ ADD PHOTO</button>
+  <button class="primary topspace" onclick="show('closeout')">COMPLETE JOB</button>
+ </div>
+</section>
+
+<section id="closeout" class="screen">
+ <div class="card"><h2>Payment & Closeout</h2>
+  <label>Labor charged</label><input id="laborPaid" type="number" value="250" oninput="closeCalc()">
+  <label>Materials charged</label><input id="matPaid" type="number" value="74" oninput="closeCalc()">
+  <label>Actual material cost</label><input id="matCost" type="number" value="52" oninput="closeCalc()">
+  <label>Travel / direct expenses</label><input id="travelCost" type="number" value="11" oninput="closeCalc()">
+  <label>Actual labor hours</label><input id="actualHours" type="number" step=".01" value="2.62" oninput="closeCalc()">
+  <div class="row"><span>Customer paid</span><b id="paidTotal">$324</b></div>
+  <div class="row"><span>Direct costs</span><b id="directTotal">$63</b></div>
+  <div class="row"><span>Contribution after direct costs</span><b id="contribution">$261</b></div>
+  <div class="row"><span>Effective earnings</span><b id="effective">$99.62/hr</b></div>
+  <button class="green" onclick="alert('Job marked paid.');show('money')">MARK PAID & CLOSE</button>
+ </div>
+</section>
+
+<section id="jobs" class="screen">
+ <div class="card"><h2>Jobs</h2>
+  <div class="row"><span><b>TV Mounting</b><br><span class="muted">Scheduled</span></span><b>$250 + mats</b></div>
+  <div class="row"><span><b>Bedroom Door Repair</b><br><span class="muted">Paid · 55 min</span></span><b>$165</b></div>
+  <div class="row"><span><b>Drywall Patch & Paint</b><br><span class="muted">Paid · 2.5 hr</span></span><b>$330</b></div>
+ </div>
+</section>
+
+<section id="inventory" class="screen">
+ <div class="card"><h2>Truck Inventory</h2>
+  <div class="row"><span>Drywall screws</span><span class="pill">ON HAND</span></div>
+  <div class="row"><span>Joint compound</span><span class="pill">LOW</span></div>
+  <div class="row"><span>HDMI cable</span><span class="pill">ON HAND</span></div>
+  <div class="row"><span>Low-voltage plates</span><span class="pill">LOW</span></div>
+  <div class="row"><span>Anchors / fasteners</span><span class="pill">ON HAND</span></div>
+ </div>
+</section>
+
+<section id="money" class="screen">
+ <div class="card"><h2>Money</h2><div class="muted">THIS MONTH</div>
+  <div class="big">$1,414</div><div class="muted">Contribution after direct costs</div>
+  <div class="row"><span>Customer payments</span><b>$1,740</b></div>
+  <div class="row"><span>Direct costs</span><b>$326</b></div>
+  <div class="row"><span>Actual labor</span><b>18.2 hr</b></div>
+  <div class="row"><span>Effective earnings</span><b>$77.69/hr</b></div>
+  <h3 style="margin-top:18px">Cost vs Payment</h3>
+  <div class="muted">Payments</div><div class="bar"><span style="width:100%"></span></div>
+  <div class="muted topspace">Direct costs</div><div class="bar"><span style="width:19%"></span></div>
+  <div class="muted topspace">Contribution</div><div class="bar"><span style="width:81%"></span></div>
+ </div>
+ <div class="card"><h3>Recent Jobs</h3>
+  <div class="row"><span>TV Mounting</span><b>$261</b></div>
+  <div class="row"><span>Door Repair</span><b>$149</b></div>
+  <div class="row"><span>Drywall Patch</span><b>$244</b></div>
+ </div>
+</section>
+
+</main>
+<nav>
+<button data-screen="home" class="active" onclick="show('home')"><span class="icon">⌂</span>Home</button>
+<button data-screen="jobs" onclick="show('jobs')"><span class="icon">▣</span>Jobs</button>
+<button data-screen="newjob" onclick="show('newjob')"><span class="icon">＋</span>Job</button>
+<button data-screen="inventory" onclick="show('inventory')"><span class="icon">▤</span>Inventory</button>
+<button data-screen="money" onclick="show('money')"><span class="icon">▥</span>Money</button>
+</nav>
+</div>
+<script>
+function show(id){
+ document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
+ document.getElementById('title').textContent = id==='home'?'Pocket Handyman':document.querySelector('#'+id+' h2')?.textContent||'Pocket Handyman';
+ window.scrollTo(0,0);
+}
+function powerFlag(){document.getElementById('powerflag').style.display=document.getElementById('power').checked?'block':'none'}
+function money(n){return '$'+Number(n||0).toFixed(2).replace('.00','')}
+function recalc(){document.getElementById('quoteTotal').textContent=money(+laborQuote.value + +materialsQuote.value)}
+function closeCalc(){
+ let p=+laborPaid.value + +matPaid.value, d=+matCost.value + +travelCost.value, c=p-d, h=+actualHours.value;
+ paidTotal.textContent=money(p); directTotal.textContent=money(d); contribution.textContent=money(c);
+ effective.textContent=h?money(c/h)+'/hr':'—';
+}
+let secs=0, running=false, interval=null;
+function renderTimer(){let h=Math.floor(secs/3600),m=Math.floor((secs%3600)/60),s=secs%60;timer.textContent=[h,m,s].map(x=>String(x).padStart(2,'0')).join(':')}
+function toggleTimer(){
+ running=!running; startBtn.textContent=running?'PAUSE':'START'; startBtn.className=running?'secondary':'green';
+ if(running) interval=setInterval(()=>{secs++;renderTimer()},1000); else clearInterval(interval);
+}
+function resetTimer(){clearInterval(interval);running=false;secs=0;startBtn.textContent='START';startBtn.className='green';renderTimer()}
+</script>
+</body>
+</html>
